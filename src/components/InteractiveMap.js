@@ -9,7 +9,7 @@ export default class InteractiveMap extends Component {
 					<Popup className="map-location">
 						<h1 className="map-location__title">{l.title}</h1>
 						<div className="map-location__description">
-							{l.description}
+							{l.location}
 						</div>
 					</Popup>
 				</Marker>

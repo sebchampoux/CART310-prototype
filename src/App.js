@@ -5,29 +5,35 @@ import LocationInfo from './components/LocationInfo';
 import SectionTitle from './components/SectionTitle';
 import Sidebar from './components/Sidebar';
 import { categories } from './utils/Categories';
+import NewLocationPopUp from './components/NewLocationPopUp';
 
 export default class App extends Component {
   constructor(p) {
     super(p);
     this.state = {
+      showNewComponentPopUp: false,
       categories,
       locations: [
         {
           position: [51.505, -0.09],
           title: 'Some place in London',
           location: 'London, UK',
-          description: 'Description of the place',
           category: 'hotels',
         },
         {
           position: [45.522992, -73.532659],
           title: 'Boomerang',
           location: 'Montreal, CA',
-          description: 'Boomerang roller coaster at La Ronde',
           category: 'attractions',
         },
       ],
     };
+  }
+
+  addNewLocation(newLocationInfo) {
+    const locations = this.state.locations.slice();
+    locations.push(newLocationInfo);
+    this.setState({ locations });
   }
 
   deleteLocation(locationToRemove) {
@@ -48,13 +54,30 @@ export default class App extends Component {
           <div className="locations-sidebar__locs-list">
             {locationsList}
           </div>
-          <button className="btn btn-primary btn-block">
+          <button
+            className="btn btn-primary btn-block"
+            onClick={this.openNewTripComponent.bind(this)}
+          >
             <FontAwesomeIcon icon="plus-circle" /> Add new trip component
           </button>
         </Sidebar>
         <InteractiveMap locations={this.state.locations} />
+        {this.state.showNewComponentPopUp &&
+          <NewLocationPopUp
+            addLocationFct={this.addNewLocation.bind(this)}
+            closeFct={this.closeNewTripComponent.bind(this)}
+          />
+        }
       </div>
     )
+  }
+
+  openNewTripComponent() {
+    this.setState({ showNewComponentPopUp: true });
+  }
+
+  closeNewTripComponent() {
+    this.setState({ showNewComponentPopUp: false });
   }
 
   printCategory(category) {
@@ -74,8 +97,8 @@ export default class App extends Component {
 
   printLocationsForCategory(category) {
     return this.state.locations
-    .filter(location => location.category === category.key)
-    .map(this.printLocation.bind(this));
+      .filter(location => location.category === category.key)
+      .map(this.printLocation.bind(this));
   }
 
   printLocation(location) {

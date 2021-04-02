@@ -6,6 +6,9 @@ export class SearchOSM {
 		const params = new URLSearchParams();
 		params.append('q', keywords);
 		params.append('format', 'json');
+		params.append('addressdetails', 1);
+		params.append('extratags', 1);
+		params.append('namedetails', 1);
 	
 		return BASE_URL + params.toString();
 	}

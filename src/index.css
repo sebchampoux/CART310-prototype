@@ -96,7 +96,9 @@
 	min-width: 50%;
 	max-width: 90%;
 	min-height: 300px;
+	max-height: 90%;
 	padding: 15px;
+	overflow: auto;
 }
 
 .my-pop-up__close-btn {

@@ -20,7 +20,7 @@ export default class NewLocationPopUp extends Component {
 					result.lon,
 				],
 				title: result.namedetails.name,
-				location: result.address.town + ', ' + result.address.state + ', ' + result.address.country_code,
+				location: result.address.city + ', ' + result.address.state + ', ' + result.address.country_code,
 				category: 'attractions',
 			};
 			return (

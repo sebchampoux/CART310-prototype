@@ -79,7 +79,10 @@ export default class App extends Component {
             <FontAwesomeIcon icon="plus-circle" /> Add new trip component
           </button>
         </Sidebar>
-        <InteractiveMap locations={this.state.locations} />
+        <InteractiveMap
+          locations={this.state.locations}
+          highlightFct={this.changeLocationHighlight.bind(this)}
+        />
         {this.state.showNewComponentPopUp &&
           <NewLocationPopUp
             addLocationFct={this.addNewLocation.bind(this)}
@@ -96,6 +99,19 @@ export default class App extends Component {
 
   closeNewTripComponent() {
     this.setState({ showNewComponentPopUp: false });
+  }
+
+  changeLocationHighlight(currentLocation, highlighted) {
+    const locations = this.state.locations.slice();
+    const locationIndex = locations.indexOf(currentLocation);
+    if (locationIndex > -1) {
+      const newLocation = {
+        ...currentLocation,
+        highlighted,
+      };
+      locations[locationIndex] = newLocation;
+      this.setState({ locations });
+    }
   }
 
   printCategory(category) {
@@ -125,6 +141,7 @@ export default class App extends Component {
         key={location.position.toString()}
         location={location}
         deleteLocationFct={() => this.deleteLocation(location)}
+        highlightFct={this.changeLocationHighlight.bind(this)}
       />
     );
   }

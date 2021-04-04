@@ -3,9 +3,22 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 
 export default class InteractiveMap extends Component {
 	render() {
-		const locations = this.props.locations.map(l => {
+		const { highlightFct, locations } = this.props;
+
+		const locationsMarkers = locations.map(l => {
+			const eventHandlers = {
+				mouseover() {
+					highlightFct(l, true);
+				},
+				mouseout() {
+					highlightFct(l, false);
+				},
+			};
 			return (
-				<Marker key={l.position.toString()} position={l.position}>
+				<Marker
+					key={l.position.toString()} position={l.position}
+					eventHandlers={eventHandlers}
+					>
 					<Popup className="map-location">
 						<h1 className="map-location__title">{l.title}</h1>
 						<div className="map-location__description">
@@ -22,7 +35,7 @@ export default class InteractiveMap extends Component {
 					attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 					url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 				/>
-				{locations}
+				{locationsMarkers}
 			</MapContainer>
 		)
 	}

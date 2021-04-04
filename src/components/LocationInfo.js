@@ -3,9 +3,14 @@ import React, { Component } from 'react'
 
 export default class LocationInfo extends Component {
 	render() {
-		const { location, deleteLocationFct, addLocationFct } = this.props;
+		const { location, deleteLocationFct, addLocationFct, highlightFct } = this.props;
+		const highlightClass = location.highlighted ? 'location-info__highlighted' : '';
 		return (
-			<div className="location-info">
+			<div
+				className={"location-info " + highlightClass}
+				onMouseOver={() => highlightFct(location, true)}
+				onMouseOut={() => highlightFct(location, false)}
+				>
 				<div className="location-info__text-wrapper">
 					<h1 className="location-info__title">{location.title}</h1>
 					<p className="location-info__location">{location.location}</p>

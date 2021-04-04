@@ -21,6 +21,12 @@ export default class App extends Component {
           category: 'transportation',
         },
         {
+          position: [38.852597251193025, -77.04019273228096],
+          title: 'Reagan International Airport',
+          location: 'Washington, DC',
+          category: 'transportation',
+        },
+        {
           position: [38.90117588377537, -77.00639981198697],
           title: 'Hertz Car Rental',
           location: 'Washington, DC, US',
@@ -74,7 +80,7 @@ export default class App extends Component {
           </div>
           <button
             className="btn btn-primary btn-block"
-            onClick={this.openNewTripComponent.bind(this)}
+            onClick={this.openNewTripComponentPopUp.bind(this)}
           >
             <FontAwesomeIcon icon="plus-circle" /> Add new trip component
           </button>
@@ -86,18 +92,18 @@ export default class App extends Component {
         {this.state.showNewComponentPopUp &&
           <NewLocationPopUp
             addLocationFct={this.addNewLocation.bind(this)}
-            closeFct={this.closeNewTripComponent.bind(this)}
+            closeFct={this.closeNewTripComponentPopUp.bind(this)}
           />
         }
       </div>
     )
   }
 
-  openNewTripComponent() {
+  openNewTripComponentPopUp() {
     this.setState({ showNewComponentPopUp: true });
   }
 
-  closeNewTripComponent() {
+  closeNewTripComponentPopUp() {
     this.setState({ showNewComponentPopUp: false });
   }
 

@@ -8,8 +8,8 @@ export default class LocationInfo extends Component {
 		return (
 			<div
 				className={"location-info " + highlightClass}
-				onMouseOver={() => highlightFct(location, true)}
-				onMouseOut={() => highlightFct(location, false)}
+				onMouseOver={() => highlightFct && highlightFct(location, true)}
+				onMouseOut={() => highlightFct && highlightFct(location, false)}
 				>
 				<div className="location-info__text-wrapper">
 					<h1 className="location-info__title">{location.title}</h1>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { activeMarkerIcon, inactiveMarkerIcon } from '../utils/MarkerIcons';
 
 export default class InteractiveMap extends Component {
 	render() {
@@ -18,6 +19,7 @@ export default class InteractiveMap extends Component {
 				<Marker
 					key={l.position.toString()} position={l.position}
 					eventHandlers={eventHandlers}
+					icon={l.highlighted ? activeMarkerIcon : inactiveMarkerIcon}
 					>
 					<Popup className="map-location">
 						<h1 className="map-location__title">{l.title}</h1>
@@ -30,7 +32,7 @@ export default class InteractiveMap extends Component {
 		});
 
 		return (
-			<MapContainer center={[40, -80]} zoom={4} scrollWheelZoom>
+			<MapContainer center={[42.5, -78]} zoom={6.5} scrollWheelZoom>
 				<TileLayer
 					attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 					url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

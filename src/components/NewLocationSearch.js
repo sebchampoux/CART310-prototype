@@ -4,7 +4,7 @@ import { SearchOSM } from '../utils/SearchOSM';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import LocationInfo from './LocationInfo';
 
-export default class NewLocationPopUp extends Component {
+export default class NewLocationSearch extends Component {
 	constructor(p){
 		super(p);
 		this.state = {
@@ -32,7 +32,7 @@ export default class NewLocationPopUp extends Component {
 		});
 
 		return (
-			<MyPopUp closeFct={this.props.closeFct}>
+			<div>
 				<h1>Add a location to your trip</h1>
 				<form
 					onSubmit={e => {
@@ -62,7 +62,7 @@ export default class NewLocationPopUp extends Component {
 				<div className="search-results">
 					{renderedSearchResults}
 				</div>
-			</MyPopUp>
+			</div>
 		)
 	}
 }

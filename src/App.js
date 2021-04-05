@@ -5,7 +5,8 @@ import LocationInfo from './components/LocationInfo';
 import SectionTitle from './components/SectionTitle';
 import Sidebar from './components/Sidebar';
 import { categories } from './utils/Categories';
-import NewLocationPopUp from './components/NewLocationPopUp';
+import NewLocationSearch from './components/NewLocationSearch';
+import MyPopUp from './components/MyPopUp';
 
 export default class App extends Component {
   constructor(p) {
@@ -90,10 +91,13 @@ export default class App extends Component {
           highlightFct={this.changeLocationHighlight.bind(this)}
         />
         {this.state.showNewComponentPopUp &&
-          <NewLocationPopUp
-            addLocationFct={this.addNewLocation.bind(this)}
+          <MyPopUp
             closeFct={this.closeNewTripComponentPopUp.bind(this)}
-          />
+          >
+            <NewLocationSearch
+              addLocationFct={this.addNewLocation.bind(this)}
+            />
+          </MyPopUp>
         }
       </div>
     )

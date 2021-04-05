@@ -17,7 +17,8 @@ export default class InteractiveMap extends Component {
 			};
 			return (
 				<Marker
-					key={l.position.toString()} position={l.position}
+					key={l.uid}
+					position={l.position}
 					eventHandlers={eventHandlers}
 					icon={l.highlighted ? activeMarkerIcon : inactiveMarkerIcon}
 					>

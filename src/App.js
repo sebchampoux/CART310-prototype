@@ -6,7 +6,7 @@ import SectionTitle from './components/SectionTitle';
 import Sidebar from './components/Sidebar';
 import { categories } from './utils/Categories';
 import NewLocationSearch from './components/NewLocationSearch';
-import MyPopUp from './components/MyPopUp';
+import { uniqueId } from './utils/unique-id';
 
 export default class App extends Component {
   constructor(p) {
@@ -16,40 +16,46 @@ export default class App extends Component {
       categories,
       locations: [
         {
-          position: [45.4687,-73.7465],
+          position: [45.4687, -73.7465],
           title: 'Montreal Airport',
           location: 'Dorval, Québec, CA',
           category: 'transportation',
+          uid: uniqueId(),
         },
         {
           position: [38.852597251193025, -77.04019273228096],
           title: 'Reagan International Airport',
           location: 'Washington, DC',
           category: 'transportation',
+          uid: uniqueId(),
         },
         {
           position: [38.90117588377537, -77.00639981198697],
           title: 'Hertz Car Rental',
           location: 'Washington, DC, US',
           category: 'transportation',
+          uid: uniqueId(),
         },
         {
           position: [39.196479908240214, -76.61218458998884],
           title: 'Hampton Inn.',
           location: 'Baltimore, Maryland, US',
           category: 'hotels',
+          uid: uniqueId(),
         },
         {
           position: [39.19871363857635, -76.68228917166556],
           title: 'Chili\'s',
           location: 'Lithicum Heights, Maryland, US',
           category: 'restaurants',
+          uid: uniqueId(),
         },
         {
           position: [38.9063118534699, -76.7725181286138],
           title: 'Six Flags America',
           location: 'Bowie, Maryland, US',
           category: 'attractions',
+          uid: uniqueId(),
         },
       ],
     };
@@ -63,7 +69,7 @@ export default class App extends Component {
 
   deleteLocation(locationToRemove) {
     const locations = this.state.locations.slice();
-    const indexToRemove = locations.indexOf(locationToRemove);
+    const indexToRemove = locations.findIndex(l => l.uid === locationToRemove.uid);
     if (indexToRemove > -1) {
       locations.splice(indexToRemove, 1);
       this.setState({ locations });
@@ -91,13 +97,23 @@ export default class App extends Component {
           highlightFct={this.changeLocationHighlight.bind(this)}
         />
         {this.state.showNewComponentPopUp &&
-          <MyPopUp
-            closeFct={this.closeNewTripComponentPopUp.bind(this)}
-          >
+          <Sidebar className="new-locations-sidebar app-root__new-location-sidebar">
+            <button
+              className="btn btn-danger sidebar__close-btn"
+              onClick={this.closeNewTripComponentPopUp.bind(this)}
+            >
+              <FontAwesomeIcon icon="times" />
+            </button>
             <NewLocationSearch
               addLocationFct={this.addNewLocation.bind(this)}
+              removeLocationFct={this.deleteLocation.bind(this)}
             />
-          </MyPopUp>
+            <p className="new-locations-sidebar__advanced-links">
+              <a href="#" className="new-locations-sidebar__link">More results...</a>
+              <br />
+              <a href="#" className="new-locations-sidebar__link">Advanced search</a>
+            </p>
+          </Sidebar>
         }
       </div>
     )
@@ -148,10 +164,11 @@ export default class App extends Component {
   printLocation(location) {
     return (
       <LocationInfo
-        key={location.position.toString()}
+        key={location.uid}
         location={location}
         deleteLocationFct={() => this.deleteLocation(location)}
-        highlightFct={this.changeLocationHighlight.bind(this)}
+        onMouseOver={() => this.changeLocationHighlight(location, true)}
+        onMouseOut={() => this.changeLocationHighlight(location, false)}
       />
     );
   }

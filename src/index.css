@@ -23,6 +23,23 @@
 	height: 100%;
 	padding: 20px;
 	background-color: #fff;
+	overflow: auto;
+}
+
+.sidebar__close-btn {
+	position: absolute;
+	top: 20px;
+	right: 20px;
+}
+
+.app-root__new-location-sidebar {
+	position: absolute;
+	top: 0;
+	left: 25%;
+}
+
+.new-locations-sidebar__advanced-links {
+	text-align: right;
 }
 
 .section-title {
@@ -54,7 +71,7 @@
 
 .location-info__highlighted {
 	box-shadow: 0 0 5px 0 rgba(0,0,0,0.5);
-	background-color: #ecf7ff;
+	background-color: #58a9e2;
 }
 
 .location-info__title {

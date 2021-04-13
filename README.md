@@ -4,6 +4,11 @@ This is one of two prototypes made for the final project of CART310.  There are 
 
 This prototype tests only the interactive map feature of my concept.  The map was made with OpenStreetMap and the Leaflet library (tool to embed OpenStreetMap into a regular web page).
 
+## See this prototype in action
+
+* [Iteration 1](https://sebastienchampoux.com/CART310/iteration1/)
+* [Iteration 2](https://sebastienchampoux.com/CART310/iteration2/)
+
 # Create React App README
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

@@ -1,4 +1,10 @@
-# Getting Started with Create React App
+# CART 310 Final project prototype
+
+This is one of two prototypes made for the final project of CART310.  There are two iterations of this prototype, accessible through tags in the Git history.
+
+This prototype tests only the interactive map feature of my concept.  The map was made with OpenStreetMap and the Leaflet library (tool to embed OpenStreetMap into a regular web page).
+
+# Create React App README
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
